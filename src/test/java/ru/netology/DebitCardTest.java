@@ -18,7 +18,12 @@ public class DebitCardTest {
 
     @BeforeEach
     public void setUp2() {
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--headless");
+
+        driver = new ChromeDriver(options);
     }
 
     @AfterEach
@@ -28,13 +33,6 @@ public class DebitCardTest {
     }
     @Test
     public void shouldSendApplication() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--headless");
-
-        driver = new ChromeDriver(options);
-
         driver.get("http://localhost:9999");
 
         driver.findElement(By.cssSelector("[name=\"name\"]")).sendKeys("Петров Иван");
